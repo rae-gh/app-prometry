@@ -20,14 +20,8 @@ This means the library can create dataframes for uses as diverse as contact maps
 **The application is freely hosted by streamlit: [PROMETRY](https://prometry.streamlit.app)**  
 
 This website gives a brief demonstration of some of the ways that prometry can be used.
-As a publicly hosted web application this does not include time and memory-intense uses such as
-generating and using the data in machine learning applications, although the dataframes and contact maps would be very suitable for such applications.
 
-Rather, this application guides you through the assorted variety of uses. It is intended to spark links and inspiration for your own ideas.
-
-All the code for the website is given on a "code" tab on each page so you can replicate all of the results here in python yourself easily and build on it.  
-
-You can also make use of this website directly to create all your data - all the plots and dataframes are downloadable.
+You can also make use of this website directly to create all your data - all the plots and dataframes are downloadable. Please cite appropriately.  
 
 ---  
 
@@ -36,7 +30,7 @@ All the source code for the library and this application is made freely availabl
 If you make use of anything from this application (dataframe data, plots, python code, scientific ideas...)
 please follow the guidance on the [Citing](https://prometry.streamlit.app/Citing) page.                     
         
-Please raise any requests or problems as a [github issue](https://github.com/RachelAlcraft/prometry/issues)
+Please raise any requests or problems as a [github issue](https://github.com/rae-gh/app-prometry/issues)
             
 ---                           
 
