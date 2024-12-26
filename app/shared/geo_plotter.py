@@ -203,7 +203,9 @@ def contact_plot(df_geo):
                         bargap = 0,  hovermode = 'closest',  showlegend = True
                     )
                 fig.update_xaxes(range=(min(df_geo["rid"]),max(df_geo["rid"]))) 
-                fig.update_yaxes(range=(min(df_geo["rid"]),max(df_geo["rid"]))) 
+                fig.update_yaxes(range=(min(df_geo["rid"]),max(df_geo["rid"])),
+                                 scaleanchor="x",
+                                 scaleratio=1)                       
                 st.plotly_chart(fig, use_container_width=False)
 
 # taken from 18.3. STRUCTURE QUALITY AND TARGET PARAMETERS
