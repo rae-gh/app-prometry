@@ -1,8 +1,8 @@
 # Create dev environment
-python3 -m venv .promenv
+python3 -m venv .env-promapp
 
 # Load dev environment
-source .promenv/bin/activate
+source .env-promapp/bin/activate
 (deactivate to exit venv)
 pip install --upgrade pip
 

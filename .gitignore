@@ -174,3 +174,4 @@ examples/results/*
 *.pdb
 *.cif
 docs/api/*
+.env-promapp/*

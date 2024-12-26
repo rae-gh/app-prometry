@@ -32,11 +32,12 @@ geos = "N:CA:C:N+1 C-1:N:CA:C N:O N:N+1 N:CA:C"
 
 #with tabDemo:
 if True:      
-        ls_structures, ls_contacts = se.explorer(use_geos="contacts")
+        ls_structures, ls_contacts = se.explorer(use_geos="contacts")        
         st.write("---")
         df = dm.maker_geos(ls_structures,ls_contacts)
         st.write("---")
         gp.contact_plot(df)
+        #gp.geo_plot(df)
         
 #with tabCode:
 #        st.write("not implemented")

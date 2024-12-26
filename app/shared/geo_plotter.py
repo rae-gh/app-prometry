@@ -155,7 +155,8 @@ def space_plot(df_atoms):
                     fig.update_yaxes(tickangle=-15)
                     st.plotly_chart(fig, use_container_width=False)
                 elif dim == "2d":
-                    fig = px.scatter(df_use, x=x_ax1, y=y_ax1, color=h_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)                        
+                    fig = px.scatter(df_use, x=x_ax1, y=y_ax1, color=h_ax1,title="",width=500, height=500, 
+                                     opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)                        
                     st.plotly_chart(fig, use_container_width=False)
                 else:
                     fig = px.scatter_3d(df_use, x=x_ax1, y=y_ax1, z=z_ax1, color=h_ax1,title="",
@@ -164,6 +165,7 @@ def space_plot(df_atoms):
                     st.plotly_chart(fig, use_container_width=False)
 
 def contact_plot(df_geo):
+    print("DEBUG 1")
     cfg.init()
     if df_geo is not None and len(df_geo.index) > 0:
         st.write("### (3/3) Visualisation")
@@ -175,32 +177,33 @@ def contact_plot(df_geo):
         ax_colsZ = list(df_geo.columns)
 
         dim = "2d"#st.radio("dimensions",["2d","3d"],index=0)
-                                                                
+                                                                        
         cols = st.columns([1,6,6,1])
         with cols[1]:
             pdb = st.selectbox("pdb", ["all"] + list(df_geo["pdb_code"].unique()),index=0)        
         with cols[2]:
             h_ax1 = st.selectbox("hue",ax_colsZ,index=0)
                 
-        df_use = df_geo
+        #df_use = df_geo
         if pdb != "all":
-            df_use = df_geo[df_geo['pdb_code'] == pdb]
-        if st.button("Calculate geo plot"):                    
+            df_geo = df_geo[df_geo['pdb_code'] == pdb]
+        print("DEBUG 2")
+        if st.button("Calculate geo plot"):        
+            print("DEBUG 3")
             cols = st.columns([1,5,1])
-            with cols[1]:                
-                if dim == "2d":
-                    fig = px.scatter(df_use, x=rid1, y=rid2, color=h_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)                                            
-                else:
-                    fig = px.scatter_3d(df_use, x=rid1, y=rid2, z=rid3, color=h_ax1,title="",
-                        width=500, height=500, opacity=0.5,color_continuous_scale=px.colors.sequential.Viridis)
-                    fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                
+            with cols[1]:                                
+                fig = px.scatter(df_geo, x=rid1, y=rid2, color=h_ax1,title="",
+                                 width=500, height=500, opacity=0.7,
+                                 color_continuous_scale=px.colors.sequential.Agsunset)                                            
+                                
                 fig.update_layout(title=f"Contact map",autosize = False,
                         xaxis = dict(zeroline = False, domain = [0,0.85],showgrid = False,range=[-180,180]),
                         yaxis = dict(zeroline = False, domain = [0,0.85],showgrid = False,range=[-180,180]),                        
                         height = 800, width = 800,  
                         bargap = 0,  hovermode = 'closest',  showlegend = True
-                    ) 
+                    )
+                fig.update_xaxes(range=(min(df_geo["rid"]),max(df_geo["rid"]))) 
+                fig.update_yaxes(range=(min(df_geo["rid"]),max(df_geo["rid"]))) 
                 st.plotly_chart(fig, use_container_width=False)
 
 # taken from 18.3. STRUCTURE QUALITY AND TARGET PARAMETERS

@@ -69,8 +69,8 @@ def explorer(use_geos="ordinary"):
     ls_structures = str_struc.split(" ")
     ls_geos = str_geo.split(" ")
 
-    if ls_geos != st.session_state['ls_geos']:        
-        st.session_state['df_geos'] = None
+    #if ls_geos != st.session_state['ls_geos']:        
+        #st.session_state['df_geos'] = None
 
 
     st.session_state['str_structures'] = str_struc
