@@ -32,8 +32,7 @@ def geo_plot(df_geos):
                     if z_ax1 == "Probability density plot":
                         fig = px.density_contour(df_geos, x=x_ax1, y=y_ax1, title="",width=500, height=500)
                         fig.update_traces(contours_coloring="fill", contours_showlabels = True)
-                    else:
-                        print("HERE")
+                    else:                        
                         fig = px.scatter(df_geos, x=x_ax1, y=y_ax1, color=z_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
                     st.plotly_chart(fig, use_container_width=False)     
                 
