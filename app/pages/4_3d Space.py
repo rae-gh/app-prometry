@@ -28,7 +28,8 @@ core - a region where there are generally solved structures - with hightly uncer
 strucs = "1crn 1ejg 3u7t 2fd7 1cbn 1cnr 3nir 1ab1 2fd9 1jxy 1jxu 1jxx 1jxw 1jxt"
 geos = "N:CA:C:N+1 C-1:N:CA:C N:O N:N+1 N:CA:C"
 
-tabDemo,tabCode = st.tabs(["demo","code"])
+#tabDemo,tabCode = st.tabs(["demo","code"])
+tabDemo = st.tabs(["demo"])
 
 with tabDemo:        
         ls_structures, ls_geos = se.explorer(use_geos="no")
@@ -37,8 +38,8 @@ with tabDemo:
         st.write("---")
         gp.space_plot(df)
         
-with tabCode:
-        st.write("not implemented")
+#with tabCode:
+#        st.write("not implemented")
 
 st.divider()
 st.caption("Crick, F. H. C., & Kendrew, J. C. (1957). X-Ray Analysis and Protein Structure. In Advances in Protein Chemistry (Vol. 12, pp. 133–214). Elsevier. https://doi.org/10.1016/S0065-3233(08)60116-3")

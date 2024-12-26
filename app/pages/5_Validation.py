@@ -26,7 +26,8 @@ st.write("""
 strucs = "1crn 1ejg 3u7t 2fd7 1cbn 1cnr 3nir 1ab1 2fd9 1jxy 1jxu 1jxx 1jxw 1jxt"
 geos = "N:CA:C:N+1 C-1:N:CA:C N:O N:N+1 N:CA:C"
 
-tabDemo,tabCode = st.tabs(["demo","code"])
+#tabDemo,tabCode = st.tabs(["demo","code"])
+tabDemo = st.tabs(["demo"])
 
 with tabDemo:        
         ls_structures, ls_geos = se.explorer(use_geos="validation")
@@ -39,8 +40,8 @@ with tabDemo:
         else:
                 gp.val_plot(df,ls_geos[0])
         
-with tabCode:
-        st.write("not implemented")
+#with tabCode:
+#        st.write("not implemented")
 
 st.divider()
 st.write("Plots underlayed with Ramachandran images from Lovell, 2003.")
