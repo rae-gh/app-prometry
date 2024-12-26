@@ -27,9 +27,10 @@ strucs = "1crn 1ejg 3u7t 2fd7 1cbn 1cnr 3nir 1ab1 2fd9 1jxy 1jxu 1jxx 1jxw 1jxt"
 geos = "N:CA:C:N+1 C-1:N:CA:C N:O N:N+1 N:CA:C"
 
 #tabDemo,tabCode = st.tabs(["demo","code"])
-tabDemo = st.tabs(["demo"])
+#tabDemo = st.tabs(["demo"])
 
-with tabDemo:        
+#with tabDemo:
+if True:
         ls_structures, ls_geos = se.explorer(use_geos="validation")
         st.write("---")
         df,df_extra = dm.maker_geos(ls_structures, ls_geos,extra_underlying=True)
