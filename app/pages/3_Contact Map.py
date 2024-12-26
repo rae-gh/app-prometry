@@ -36,9 +36,8 @@ if True:
         st.write("---")
         df = dm.maker_geos(ls_structures,ls_contacts)
         st.write("---")
-        gp.contact_plot(df)
-        #gp.geo_plot(df)
-        
+        gp.contact_plot(df)                
+
 #with tabCode:
 #        st.write("not implemented")
 

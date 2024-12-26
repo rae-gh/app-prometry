@@ -14,10 +14,13 @@ def explorer(use_geos="ordinary"):
     ls_structures = st.session_state['ls_structures']
     ls_geos = st.session_state['ls_geos']
     ls_contacts = st.session_state['ls_contacts']
+    ls_criteria = st.session_state['ls_criteria']
+    
         
     str_struc = " ".join(ls_structures)
     str_geo = " ".join(ls_geos)
     str_contacts = " ".join(ls_contacts)
+    str_criteria = " ".join(ls_criteria)
     
     st.write("### (1/3) Selection")
     sources = ["selection","browse user uploaded","new upload"]
@@ -64,7 +67,10 @@ def explorer(use_geos="ordinary"):
             ls_cs = str_contacts.split(" ")
             str_geo = ls_cs[0] + "[aa|20]:{" + ls_cs[1] + "@i}[dis|0.5><10,rid|>1,aa|20]"
         with cols[1]:
-            str_geo = st.text_input("Translated to geos =",value=str_geo,help="space delim, 2, 3 or 4 atoms - see help", key="geo")    
+            str_geo = st.text_input("Translated to geos =",value=str_geo,help="space delim, 2, 3 or 4 atoms - see help", key="geo")
+    elif use_geos == "criteria":
+        st.write("Suggested structures for iron are: 5d8v 4u9h 5jsk 6rk0")
+        str_geo = st.text_input("Criertia search:",value=str_criteria,help="see help", key="crit")
     
     ls_structures = str_struc.split(" ")
     ls_geos = str_geo.split(" ")
@@ -78,6 +84,8 @@ def explorer(use_geos="ordinary"):
     
     if use_geos == "contacts":
         st.session_state['ls_contacts'] = ls_geos
+    elif use_geos == "criteria":
+        st.session_state['ls_criteria'] = ls_criteria
     else:
         st.session_state['ls_geos'] = ls_geos
     

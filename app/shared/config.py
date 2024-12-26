@@ -18,6 +18,6 @@ def init():
     if "ls_contacts" not in st.session_state:
         st.session_state['ls_contacts'] = ["CA[aa|20]:{CA@i}[dis|0.5><10,rid|>1,aa|20"]
     if "ls_criteria" not in st.session_state:
-        st.session_state['ls_criteria'] = ["S:(O)"]
+        st.session_state['ls_criteria'] = ['SG:{N}+2','SG:{SG@1}','SG:{SG@2}','SG:SG','SG:(N)','SG:N']
     if "str_structures" not in st.session_state:
         st.session_state['str_structures'] = "AF-P04637-F1-model_v4 1YCS"
