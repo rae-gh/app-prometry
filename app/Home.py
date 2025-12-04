@@ -4,7 +4,7 @@ from shared import config as cfg
 
 st.set_page_config(
         page_title="prometry",
-        page_icon="app/static/plot.png",
+        page_icon="app/static/brca2.png",
         layout="wide",
     )
    
