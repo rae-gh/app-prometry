@@ -1,6 +1,6 @@
 import streamlit as st
-from prometry import pdbloader as pl
-from prometry import pdbgeometry as pg
+from maptial.geo import pdbloader as pl
+from maptial.geo import pdbgeometry as pg
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
@@ -34,7 +34,7 @@ def geo_plot(df_geos):
                         fig.update_traces(contours_coloring="fill", contours_showlabels = True)
                     else:                        
                         fig = px.scatter(df_geos, x=x_ax1, y=y_ax1, color=z_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(fig, use_container_width=False)     
+                    st.plotly_chart(fig, width='content')     
                 
 def geo_plot_ramachandran(df_geos):
     from PIL import Image    
@@ -51,16 +51,23 @@ def geo_plot_ramachandran(df_geos):
             with cols[0]:
                 st.write("hue:")
             with cols[1]:
-                z_ax1 = st.selectbox("z-axis (hue)",ax_colsZ,index=0,label_visibility="collapsed")
+                z_ax1 = st.selectbox("z-axis (hue)",ax_colsZ,index=2,label_visibility="collapsed")
                     
+            horizontal = st.checkbox("Horizontal layout",value=True)
             if st.button("Calculate geo plot"):                    
-                cols = st.columns([1,7,7,7,1])                                
+                if horizontal:
+                    cols = st.columns([1,7,7,7,1])
+                else:
+                    cols = st.columns([1,9,1])                                                
                 plots_obj = []
                 plots_obj.append((1,"exc PRO&GLY",img1,df_geos[df_geos.aa != "PRO"][df_geos.aa != "GLY"]))
                 plots_obj.append((2,", PRO",img2,df_geos[df_geos.aa == "PRO"]))
                 plots_obj.append((3,", GLY",img3,df_geos[df_geos.aa == "GLY"]))
-                for col,aa,img,df in plots_obj:                          
-                    with cols[col]:                        
+                for col,aa,img,df in plots_obj:
+                    mycol = cols[1]
+                    if horizontal:
+                        mycol = cols[col]
+                    with mycol:                      
                         fig = px.scatter(df, x=x_ax1, y=y_ax1, color=z_ax1,title="", opacity=0.6,color_continuous_scale="temps")
                         fig.update_layout(title=f"Ramachandran {aa} ({len(df.index)})",autosize = False,
                             xaxis = dict(zeroline = False, domain = [0,0.85],showgrid = False,range=[-180,180]),
@@ -69,7 +76,7 @@ def geo_plot_ramachandran(df_geos):
                             bargap = 0,  hovermode = 'closest',  showlegend = True
                         )  
                         fig.add_layout_image(dict(source=img, xref="x", yref="y", x=0,y=180, xanchor="center", sizex=360, sizey=360, sizing="stretch", opacity=0.35, layer="below"))                                                                                       
-                        st.plotly_chart(fig, use_container_width=False)     
+                        st.plotly_chart(fig, width='content')     
 
 def space_plot(df_atoms):
     cfg.init()
@@ -152,26 +159,40 @@ def space_plot(df_atoms):
                     fig.add_vline(x=rid_val, line_width=0.5, line_dash="dash", line_color="red")
                     fig.update_xaxes(tickangle=45)
                     fig.update_yaxes(tickangle=-15)
-                    st.plotly_chart(fig, use_container_width=False)
+                    st.plotly_chart(fig, width='content')
                 elif dim == "2d":
                     fig = px.scatter(df_use, x=x_ax1, y=y_ax1, color=h_ax1,title="",width=500, height=500, 
                                      opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)                        
-                    st.plotly_chart(fig, use_container_width=False)
+                    st.plotly_chart(fig, width='content')
                 else:
-                    fig = px.scatter_3d(df_use, x=x_ax1, y=y_ax1, z=z_ax1, color=h_ax1,title="",
-                        width=500, height=500, opacity=0.5,color_continuous_scale=px.colors.sequential.Viridis)
+                    # Check if the hue column is categorical or numeric
+                    if df_use[h_ax1].dtype == 'object' or df_use[h_ax1].dtype.name == 'category':
+                        # Use discrete colors for categorical data
+                        fig = px.scatter_3d(df_use, x=x_ax1, y=y_ax1, z=z_ax1, color=h_ax1,title="",
+                            width=500, height=500, opacity=0.5,
+                            color_discrete_sequence=px.colors.qualitative.Plotly)
+                    else:
+                        # Use continuous color scale for numeric data
+                        fig = px.scatter_3d(df_use, x=x_ax1, y=y_ax1, z=z_ax1, color=h_ax1,title="",
+                            width=500, height=500, opacity=0.5,
+                            color_continuous_scale="Sunset_r")
                     fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                    st.plotly_chart(fig, use_container_width=False)
+                    st.plotly_chart(fig, width='content')
 
 def contact_plot(df_geo):
     print("DEBUG 1")
     cfg.init()
     if df_geo is not None and len(df_geo.index) > 0:
         st.write("### (3/3) Visualisation")
+        cols = df_geo.columns
         geo = df_geo.columns[0]
+        # we want to rename all columns so that the val_key is replaced with "contact"
+        for col in cols:            
+            df_geo = df_geo.rename(columns={col:col.replace(geo,"geo")})
+        
         rid1 = "rid"
-        rid2 = f"rid2_{geo}"
-        rid3 = f"rid3_{geo}"
+        rid2 = f"rid2_geo"
+        rid3 = f"rid3_geo"
                 
         ax_colsZ = list(df_geo.columns)
 
@@ -205,7 +226,7 @@ def contact_plot(df_geo):
                 fig.update_yaxes(range=(min(df_geo["rid"]),max(df_geo["rid"])),
                                  scaleanchor="x",
                                  scaleratio=1)                       
-                st.plotly_chart(fig, use_container_width=False)
+                st.plotly_chart(fig, width='content')
 
 # taken from 18.3. STRUCTURE QUALITY AND TARGET PARAMETERS
 # Table 18.3.2.3. Bond lengths (  ̊ A) and angles (°) of peptide backbone fragments
@@ -256,7 +277,7 @@ def val_plot(df_geos,geo):
                                 
                                 fig.update_annotations(font=dict(color="black"))
                                 fig.update_traces(marker=dict(line=dict(width=0.2,color='white')))                                                         
-                                st.plotly_chart(fig, use_container_width=True)
+                                st.plotly_chart(fig, width='stretch')
 
                 
                 for pdb in pdbs:            
@@ -284,7 +305,7 @@ def val_plot(df_geos,geo):
                             #    fig.update_traces(xbins=dict(size=0.0025))
                             #else:
                             #    fig.update_traces(xbins=dict(size=0.5))
-                            st.plotly_chart(fig, use_container_width=True)
+                            st.plotly_chart(fig, width='stretch')
 
                                 
                     
