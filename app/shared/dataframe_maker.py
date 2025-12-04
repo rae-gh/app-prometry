@@ -1,6 +1,6 @@
 import streamlit as st
-from prometry import pdbloader as pl
-from prometry import pdbgeometry as pg
+from maptial.geo import pdbloader as pl
+from maptial.geo import pdbgeometry as pg
 from shared import config as cfg
 
 DATADIR = "app/data/"
