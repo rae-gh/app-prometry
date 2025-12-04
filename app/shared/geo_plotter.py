@@ -34,7 +34,7 @@ def geo_plot(df_geos):
                         fig.update_traces(contours_coloring="fill", contours_showlabels = True)
                     else:                        
                         fig = px.scatter(df_geos, x=x_ax1, y=y_ax1, color=z_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(fig, width='content')     
+                    st.plotly_chart(fig, use_container_width=False)     
                 
 def geo_plot_ramachandran(df_geos):
     from PIL import Image    
@@ -76,7 +76,7 @@ def geo_plot_ramachandran(df_geos):
                             bargap = 0,  hovermode = 'closest',  showlegend = True
                         )  
                         fig.add_layout_image(dict(source=img, xref="x", yref="y", x=0,y=180, xanchor="center", sizex=360, sizey=360, sizing="stretch", opacity=0.35, layer="below"))                                                                                       
-                        st.plotly_chart(fig, width='content')     
+                        st.plotly_chart(fig, use_container_width=False)     
 
 def space_plot(df_atoms):
     cfg.init()
@@ -159,11 +159,11 @@ def space_plot(df_atoms):
                     fig.add_vline(x=rid_val, line_width=0.5, line_dash="dash", line_color="red")
                     fig.update_xaxes(tickangle=45)
                     fig.update_yaxes(tickangle=-15)
-                    st.plotly_chart(fig, width='content')
+                    st.plotly_chart(fig, use_container_width=False)
                 elif dim == "2d":
                     fig = px.scatter(df_use, x=x_ax1, y=y_ax1, color=h_ax1,title="",width=500, height=500, 
                                      opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)                        
-                    st.plotly_chart(fig, width='content')
+                    st.plotly_chart(fig, use_container_width=False)
                 else:
                     # Check if the hue column is categorical or numeric
                     if df_use[h_ax1].dtype == 'object' or df_use[h_ax1].dtype.name == 'category':
@@ -177,7 +177,7 @@ def space_plot(df_atoms):
                             width=500, height=500, opacity=0.5,
                             color_continuous_scale="Sunset_r")
                     fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                    st.plotly_chart(fig, width='content')
+                    st.plotly_chart(fig, use_container_width=False)
 
 def contact_plot(df_geo):
     print("DEBUG 1")
@@ -226,7 +226,7 @@ def contact_plot(df_geo):
                 fig.update_yaxes(range=(min(df_geo["rid"]),max(df_geo["rid"])),
                                  scaleanchor="x",
                                  scaleratio=1)                       
-                st.plotly_chart(fig, width='content')
+                st.plotly_chart(fig, use_container_width=False)
 
 # taken from 18.3. STRUCTURE QUALITY AND TARGET PARAMETERS
 # Table 18.3.2.3. Bond lengths (  ̊ A) and angles (°) of peptide backbone fragments
@@ -277,7 +277,7 @@ def val_plot(df_geos,geo):
                                 
                                 fig.update_annotations(font=dict(color="black"))
                                 fig.update_traces(marker=dict(line=dict(width=0.2,color='white')))                                                         
-                                st.plotly_chart(fig, width='stretch')
+                                st.plotly_chart(fig, use_container_width=True)
 
                 
                 for pdb in pdbs:            
@@ -305,7 +305,7 @@ def val_plot(df_geos,geo):
                             #    fig.update_traces(xbins=dict(size=0.0025))
                             #else:
                             #    fig.update_traces(xbins=dict(size=0.5))
-                            st.plotly_chart(fig, width='stretch')
+                            st.plotly_chart(fig, use_container_width=True)
 
                                 
                     
