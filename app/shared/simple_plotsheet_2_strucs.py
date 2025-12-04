@@ -1,6 +1,6 @@
 import streamlit as st
-from prometry import pdbloader as pl
-from prometry import pdbgeometry as pg
+from maptial.geo import pdbloader as pl
+from maptial.geo import pdbgeometry as pg
 import pandas as pd
 import plotly.express as px
 
@@ -9,8 +9,8 @@ DATADIR = "app/data/"
 
 def plot_sheet(structuresA,structuresB, geos, id1s,id2s):
 
-    code_string = "from prometry import pdbloader as pl\n"
-    code_string += "from prometry import pdbgeometry as pg\n"
+    code_string = "from maptial.geo import pdbloader as pl\n"
+    code_string += "from maptial.geo import pdbgeometry as pg\n"
     code_string += "import pandas as pd\n"
     code_string += f"DATADIR = '{DATADIR}'\n"
 
@@ -156,14 +156,14 @@ def plot_sheet(structuresA,structuresB, geos, id1s,id2s):
                 cols = st.columns(2)
                 with cols[0]:
                     fig = px.scatter(df_geos, x=x_ax1, y=y_ax1, color=z_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(fig, use_container_width=False)
+                    st.plotly_chart(fig, width='content')
                     figB = px.scatter(df_geosB, x=x_ax1, y=y_ax1, color=z_ax1,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(figB, use_container_width=False)
+                    st.plotly_chart(figB, width='content')
                 with cols[1]:
                     fig = px.scatter(df_geos, x=x_ax2, y=y_ax2, color=z_ax2,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(fig, use_container_width=False)
+                    st.plotly_chart(fig, width='content')
                     figB = px.scatter(df_geosB, x=x_ax2, y=y_ax2, color=z_ax2,title="",width=500, height=500, opacity=0.7,color_continuous_scale=px.colors.sequential.Viridis)
-                    st.plotly_chart(figB, use_container_width=False)
+                    st.plotly_chart(figB, width='content')
                 
                 code_string2 = "import plotly.express as px\n"
                 code_string2 += "# Choose the dataframe you want to look at, df_geos or df_geosB\n"

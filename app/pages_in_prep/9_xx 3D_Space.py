@@ -46,7 +46,7 @@ with tabDemo:
     
     st.write("##### Edit/enter structures")
 
-    structures = "AF-P04637-F1-model_v4"
+    structures = "1ejg"
             
     cols = st.columns([1,1])
     with cols[0]:
@@ -139,12 +139,12 @@ with tabDemo:
                 fig = px.scatter_3d(df_atoms[df_atoms['pdbCode'] == pdb], x=ax_ax1, y=ay_ax1, z=az_ax1, color=ah_ax1,title="",
                     width=500, height=500, opacity=0.5,color_continuous_scale=px.colors.sequential.Viridis)
                 fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                st.plotly_chart(fig, use_container_width=False)
+                st.plotly_chart(fig, width='content')
             with cols[1]:                
                 fig = px.scatter_3d(df_atoms[df_atoms['pdbCode'] == pdb], x=ax_ax2, y=ay_ax2, z=az_ax2, color=ah_ax2,title="",
                     width=500, height=500, opacity=0.5,color_continuous_scale=px.colors.sequential.Viridis)
                 fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                st.plotly_chart(fig, use_container_width=False)
+                st.plotly_chart(fig, width='content')
 
             code_string2 = "import plotly.express as px\n"
             code_string2 += f"fig = px.scatter_3d(df_atoms, x='x', y='y', z='z',color='{ah_ax1}',title='',\n"

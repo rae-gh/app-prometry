@@ -30,8 +30,6 @@ code_string = "import requests\n"
 
 code_string2 = ""
 
-
-
 tabDemo,tabCode = st.tabs(["demo","code"])
 
 with tabDemo:
@@ -43,12 +41,16 @@ with tabDemo:
 
     cols = st.columns([1,1,1,1])
     with cols[0]:
-        gene = st.text_input("Gene", value="BRCA1")                    
+        gene = st.text_input("Gene", value="BRCA1")                                    
     with cols[1]:
         taxon = st.text_input("Taxon", value="9606") 
+        
+    
+    with cols[2]:                        
+        alpha_fold_version = st.slider("AlphaFold version",1,20,6)
+    with cols[3]:
         url = f"https://rest.uniprot.org/uniprotkb/search?query=reviewed:true+AND+organism_id:{taxon}+AND+gene_exact:{gene}"
         url_un = f"https://rest.uniprot.org/uniprotkb/search?query=reviewed:false+AND+organism_id:{taxon}+AND+gene_exact:{gene}"
-    with cols[2]:                        
         st.write(f"[Uniprot api call - reviewed]({url})")
         st.write(f"[Uniprot api call - unreviewed]({url_un})")
     
@@ -58,6 +60,7 @@ with tabDemo:
     code_string += f"ra = requests.get(url='{url}')"
     code_string += f"ra = requests.get(url='{url_un}')"
     code_string += """
+    
 accessions = []
 pdbs = []
 data = ra.json()
@@ -66,7 +69,7 @@ if len(data["results"]) > 0:
         accession = dt["primaryAccession"]
         accessions = dt["secondaryAccessions"]
 accessions.insert(0, accession)     
-pdbs.insert(0, f"AF-{accession}-F1-model_v4")   
+pdbs.insert(0, f"AF-{accession}-F1-model_v{alpha_fold_version}")   
 
 res = data["results"][0]["uniProtKBCrossReferences"]
 for x in res:
@@ -77,7 +80,7 @@ for x in res:
 print(accessions)
 print(pdbs)
         """
-
+    st.session_state['code_gene'] = code_string
     if st.button("Find structures"):
         accessions = []
         accession = ""
@@ -147,7 +150,7 @@ print(pdbs)
             st.write("AlphaFold structures")
             for acc in accessions:                        
                 count += 1
-                af_pdb = f"AF-{acc}-F1-model_v4"
+                af_pdb = f"AF-{acc}-F1-model_v{alpha_fold_version}"
                 af_url = f"https://alphafold.ebi.ac.uk/files/{af_pdb}.pdb"
                 response = requests.get(af_url)
                 if response.status_code == 200:
@@ -179,10 +182,7 @@ print(pdbs)
             )
         else:
             st.write("No structures found")
-
-
-        st.session_state['code_gene'] = code_string
-
+        
 with tabCode:
     st.code(st.session_state['code_gene'])
 

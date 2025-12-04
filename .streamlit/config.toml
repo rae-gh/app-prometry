@@ -1,0 +1,30 @@
+[theme]
+# Primary color - Yellow accent
+primaryColor = "#8f3131ff"
+
+# Background color - Light grey
+backgroundColor = "#f0f1d0ff"
+
+# Secondary background color - Darker grey for sidebar
+secondaryBackgroundColor = "#bdbbc0ff"
+
+# Text color - Dark grey for good contrast
+textColor = "#12021aff"
+
+borderColor = "#82c4a3ff"
+showWidgetBorder=false
+
+# Font family
+font = "sans serif"
+
+[server]
+# Disable CORS for development
+enableCORS = false
+enableXsrfProtection = false
+enableStaticServing=true
+
+[browser]
+# Disable usage stats gathering
+gatherUsageStats = false
+
+

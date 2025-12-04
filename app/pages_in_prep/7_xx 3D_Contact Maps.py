@@ -156,7 +156,7 @@ with tabDemo:
                 fig = px.scatter_3d(df_use, x=x_ax1, y=y_ax1, z=z_ax1, color="hue",title="", #width=500, 
                 height=500, opacity=0.3,color_continuous_scale=px.colors.sequential.Viridis)
                 fig.update_traces(marker=dict(size=5,line=dict(width=0,color='silver')),selector=dict(mode='markers'))
-                st.plotly_chart(fig, use_container_width=False)
+                st.plotly_chart(fig, width='content')
             
             
             
