@@ -4,9 +4,9 @@
 
 ## A library to calculate geometric parameters of protein structures and perform criteria search
 
+<img src="https://github.com/rae-gh/app-prometry/blob/db6c0c738d55123bc37b3d08aef9b07acf1e5048/app/static/brca2.png" alt="Prometry logo" width="200" style="float: right; margin-right: 20px; margin-bottom: 10px;" />
 PROMETRY is a powerful Python library designed for analyzing protein structures through geometric parameter calculations and criteria-based searches.
 
-![PROMETRY](![alt text](image.png))
 
 ## Key Features
 
