@@ -21,7 +21,7 @@ straightforward methods to estimate coordinate uncertainties of these prediction
 ''')
 st.write("Exploration has shown that nearest plots can show impossible clashes in AlphaFold structures, such as this clash in MAST4 between a proline and a cysteine.")
 
-af_structure = "AF-O15021-F1-model_v4"
+af_structure = "AF-O15021-F1-model_v6"
 structures = "2W7R"
 geos = "CA:{CA&1}"
 id1s = ("CA:{CA&1}","info_CA:{CA&1}","bf_CA:{CA&1}")
