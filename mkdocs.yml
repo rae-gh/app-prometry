@@ -36,22 +36,7 @@ theme:
     repo: fontawesome/brands/github
 
 nav:
-  - Home: index.md
-  - Getting Started:
-      - Installation: getting-started/installation.md
-      - Quick Start: getting-started/quick-start.md
-  - User Guide:
-      - Overview: user-guide/overview.md
-      - Geometric Search: user-guide/geometric-search.md
-      - Structure Search: user-guide/structure-search.md
-      - Criteria & Filters: user-guide/criteria.md
-      - Visualizations: user-guide/visualizations.md
-  - API Reference:
-      - Core Modules: api/core.md
-      - Code Structure: api/code-structure.md
-  - Contributing:
-      - Development: contributing/development.md
-      - Guidelines: contributing/guidelines.md
+  - Home: index.md  
   - About:
       - Citation: about/citation.md
       - License: about/license.md
